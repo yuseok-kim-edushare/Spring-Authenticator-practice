@@ -15,9 +15,6 @@ spring:
       host: localhost
       port: 6379
   security:
-    user:
-      name: user
-      password: password
     oauth2:
       client:
         oidc-client:
