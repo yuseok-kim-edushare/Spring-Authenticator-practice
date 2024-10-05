@@ -1,3 +1,51 @@
 spring:
   application:
     name: authservice
+  datasource:
+    url: jdbc:mysql://localhost:3306/authservice
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      client:
+        oidc-client:
+          registration:
+            client-id: 1234567890
+            client-secret: 1234567890
+            client-authentication-methods:
+              - "client-secret-basic"
+            authorization-grant-types:
+              - "authorization-code"
+              - "refresh-token"
+            redirect-uris:
+              - "http://localhost:8080/login/oauth2/code/oidc-client"
+            post-logout-redirect-uris:
+              - "http://localhost:8080/"
+            scopes:
+              - "openid"
+              - "profile"
+              - "email"
+              - "address"
+              - "phone"
+            require-proof-key: true
+            require-authorization-consent: true
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+server:
+  port: 9000
+
