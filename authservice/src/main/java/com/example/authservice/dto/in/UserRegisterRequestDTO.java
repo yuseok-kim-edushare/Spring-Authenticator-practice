@@ -5,8 +5,9 @@ import com.example.authservice.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
@@ -19,7 +20,11 @@ public class UserRegisterRequestDTO {
     private String name;
     private String address;
     private LocalDate birthDate;
-    private String roles;
+    private String username;
+
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(this.password);
+    }
 
     public static UserRegisterRequestDTO from(UserRegisterRequestVO userRegisterRequestVO) {
         return new UserRegisterRequestDTO(
@@ -30,7 +35,20 @@ public class UserRegisterRequestDTO {
             userRegisterRequestVO.getName(),
             userRegisterRequestVO.getAddress(),
             userRegisterRequestVO.getBirthDate(),
-            "ROLE_USER"
+            UUID.randomUUID().toString()
         );
+    }
+
+    public User toEntity() {
+        return User.builder()
+            .loginID(loginID)
+            .password(password)
+            .email(email)
+            .phoneNumber(phoneNumber)
+            .name(name)
+            .address(address)
+            .birthDate(birthDate)
+            .username(username)
+            .build();
     }
 }

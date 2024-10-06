@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 @Getter
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
 public class User implements UserDetails {
 
@@ -117,4 +118,20 @@ public class User implements UserDetails {
         return isEnabled;
     }
 
+    @Builder
+    public User(String loginID, String password, String email, String phoneNumber, String name, String address, LocalDate birthDate, String username) {
+        this.loginID = loginID;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.address = address;
+        this.birthDate = birthDate;
+        this.roles = "ROLE_USER";
+        this.isAccountNonExpired = true;
+        this.isAccountNonLocked = true;
+        this.isCredentialsNonExpired = true;
+        this.isEnabled = true;
+        this.username = username;
+    }
 }
