@@ -36,6 +36,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.http.MediaType;
 import com.example.authservice.application.CustomUserDetailsService;
+import com.example.authservice.util.JwtTokenProvider;
 
 @Configuration
 @EnableWebSecurity
@@ -144,4 +145,8 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder(13);
     }
 
+    @Bean
+    public JwtTokenProvider jwtTokenProvider() {
+        return new JwtTokenProvider();
+    }
 }

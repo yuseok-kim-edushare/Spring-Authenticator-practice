@@ -1,7 +1,7 @@
 package com.example.authservice.application;
 
 import com.example.authservice.dto.in.*;
-
+import com.example.authservice.dto.out.*;
 /*
  * 회원 관리 서비스
  * 1. 회원 가입
@@ -15,5 +15,6 @@ import com.example.authservice.dto.in.*;
 public interface UserService {
     // 회원 가입
     void registerUser(UserRegisterRequestDTO userRegisterRequestDTO);
-    
+    // 로그인
+    UserLoginResponseDTO loginUser(UserLoginRequestDTO userLoginRequestDTO);
 }
